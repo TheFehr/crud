@@ -260,6 +260,8 @@ abstract class Resource
 
     /**
      * Get the text for the list view action.
+     * 
+     * @return string
      */
     public static function listViewActionLabel(): string
     {
@@ -268,6 +270,8 @@ abstract class Resource
 
     /**
      * Get the text for the list edit action.
+     * 
+     * @return string
      */
     public static function listEditActionLabel(): string
     {
