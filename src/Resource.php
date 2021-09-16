@@ -259,6 +259,22 @@ abstract class Resource
     }
 
     /**
+     * Get the text for the list view action.
+     */
+    public static function listViewActionLabel(): string
+    {
+        return __('View');
+    }
+
+    /**
+     * Get the text for the list edit action.
+     */
+    public static function listEditActionLabel(): string
+    {
+        return __('Edit');
+    }
+
+    /**
      * Get the text for the create breadcrumbs.
      *
      * @return string

@@ -87,7 +87,7 @@ class ListScreen extends CrudScreen
     {
         return Group::make([
 
-            Link::make(__('View'))
+            Link::make($this->resource::listViewActionLabel())
                 ->icon('eye')
                 ->canSee($this->can('view'))
                 ->route('platform.resource.view', [
@@ -95,7 +95,7 @@ class ListScreen extends CrudScreen
                     $model->getAttribute($model->getKeyName()),
                 ]),
 
-            Link::make(__('Edit'))
+            Link::make($this->resource::listEditActionLabel())
                 ->icon('pencil')
                 ->canSee($this->can('update'))
                 ->route('platform.resource.edit', [
