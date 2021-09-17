@@ -36,7 +36,7 @@ abstract class Resource
      *
      * @return bool|string|null
      */
-    public function navigationTitle(): bool|string|null
+    public static function navigationTitle(): bool|string|null
     {
         return null;
     }
@@ -271,6 +271,7 @@ abstract class Resource
     }
 
     /**
+<<<<<<< HEAD
      * Get the text for the actions column on the list view.
      *
      * @return string
@@ -282,6 +283,9 @@ abstract class Resource
 
     /**
      * Get the text for the view action button on the list view.
+=======
+     * Get the text for the list view action.
+>>>>>>> 2b8405b (Allow custom title for the resources in the navigation)
      *
      * @return string
      */
