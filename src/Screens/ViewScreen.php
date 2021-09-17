@@ -44,7 +44,7 @@ class ViewScreen extends CrudScreen
         return [
             $this->actionsButtons(),
 
-            Link::make(__('Edit'))
+            Link::make($this->resource::viewScreenEditButtonLabel())
                 ->icon('pencil')
                 ->canSee($this->can('update'))
                 ->route('platform.resource.edit', [

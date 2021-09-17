@@ -63,7 +63,7 @@ class ListScreen extends CrudScreen
                     ->checked(false);
             }));
 
-        $grid->push(TD::make(__('Actions'))
+        $grid->push(TD::make($this->resource::listScreenActionsLabel())
             ->cantHide()
             ->render(function (Model $model) {
                 return $this->getTableActions($model)
@@ -87,7 +87,7 @@ class ListScreen extends CrudScreen
     {
         return Group::make([
 
-            Link::make($this->resource::listViewActionLabel())
+            Link::make($this->resource::listScreenActionsViewLabel())
                 ->icon('eye')
                 ->canSee($this->can('view'))
                 ->route('platform.resource.view', [
@@ -95,7 +95,7 @@ class ListScreen extends CrudScreen
                     $model->getAttribute($model->getKeyName()),
                 ]),
 
-            Link::make($this->resource::listEditActionLabel())
+            Link::make($this->resource::listScreenActionsEditLabel())
                 ->icon('pencil')
                 ->canSee($this->can('update'))
                 ->route('platform.resource.edit', [

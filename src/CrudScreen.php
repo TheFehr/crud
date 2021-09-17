@@ -101,7 +101,7 @@ abstract class CrudScreen extends Screen
     {
         $actions = $this->availableActions();
 
-        return DropDown::make('Actions')
+        return DropDown::make($this->resource::actionsDropDownLabel())
             ->icon('options-vertical')
             ->canSee($actions->isNotEmpty())
             ->list($actions->toArray());

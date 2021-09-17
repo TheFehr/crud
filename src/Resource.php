@@ -147,6 +147,16 @@ abstract class Resource
     }
 
     /**
+     * Get the text for the resource actions dropdown label.
+     *
+     * @return string|null
+     */
+    public static function actionsDropDownLabel(): string
+    {
+        return __('Actions');
+    }
+
+    /**
      * Get the text for the create resource button.
      *
      * @return string|null
@@ -260,11 +270,21 @@ abstract class Resource
     }
 
     /**
-     * Get the text for the list view action.
+     * Get the text for the actions column on the list view.
+     * 
+     * @return string
+     */
+    public static function listScreenActionsLabel(): string
+    {
+        return __('Actions');
+    }
+
+    /**
+     * Get the text for the view action button on the list view.
      *
      * @return string
      */
-    public static function listViewActionLabel(): string
+    public static function listScreenActionsViewLabel(): string
     {
         return __('View');
     }
@@ -274,7 +294,7 @@ abstract class Resource
      *
      * @return string
      */
-    public static function listEditActionLabel(): string
+    public static function listScreenActionsEditLabel(): string
     {
         return __('Edit');
     }
@@ -297,6 +317,14 @@ abstract class Resource
     public static function editBreadcrumbsMessage(): string
     {
         return __('Edit :resource', ['resource' => static::singularLabel()]);
+    }
+
+    /**
+     * Get the text for the edit button on the view screen
+     */
+    public static function viewScreenEditButtonLabel(): string
+    {
+        return __('Edit');
     }
 
     /**
