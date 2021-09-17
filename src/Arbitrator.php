@@ -74,18 +74,25 @@ class Arbitrator
     public function boot(): void
     {
         $this->resources
-            ->sort(function (Resource $resource) {
-                return [$resource::sort(), $resource::label()];
+            ->groupBy(function (Resource $resource) {
+                return $resource::navigationTitle();
             })
+            ->sort()
             ->values()
-            ->sort(function ($resource, $resource2) {
-                return strnatcmp($resource::label(), $resource2::label());
-            })
-            ->values()
-            ->each(function (Resource $resource, $key) {
-                $this
-                    ->registerPermission($resource)
-                    ->registerMenu($resource, $key);
+            ->each(function (Collection $resourceGroup) {
+                $resourceGroup->sort(function (Resource $resource) {
+                    return [$resource::sort(), $resource::label()];
+                })
+                    ->values()
+                    ->sort(function ($resource, $resource2) {
+                        return strnatcmp($resource::label(), $resource2::label());
+                    })
+                    ->values()
+                    ->each(function (Resource $resource, $key) {
+                        $this
+                            ->registerPermission($resource)
+                            ->registerMenu($resource, $key);
+                    });
             });
     }
 
@@ -123,11 +130,12 @@ class Arbitrator
      */
     private function registerMenu(Resource $resource, int $key): Arbitrator
     {
-        if (! $resource::displayInNavigation()) {
+        if ($resource::navigationTitle() === false) {
             return $this;
         }
 
-        View::composer('platform::dashboard', function () use ($resource, $key) {
+        $title = $resource::navigationTitle() ?? __('Resources');
+        View::composer('platform::dashboard', function () use ($resource, $key, $title) {
             Dashboard::registerMenuElement(
                 \Orchid\Platform\Dashboard::MENU_MAIN,
                 Menu::make($resource::label())
@@ -136,7 +144,7 @@ class Arbitrator
                     ->active($this->activeMenu($resource))
                     ->permission($resource::permission())
                     ->sort($resource::sort())
-                    ->title($key === 0 ? __('Resources') : null)
+                    ->title($key === 0 ? $title : null)
             );
         });
 

@@ -30,13 +30,14 @@ abstract class Resource
     }
 
     /**
-     * Get the resource should be displayed in the navigation
+     * Get the menu title under which the resource should be displayed in the navigation,
+     *  null will default to a standard value
      *
-     * @return bool
+     * @return bool|string|null
      */
-    public static function displayInNavigation(): bool
+    public static function navigationTitle(): bool|string|null
     {
-        return true;
+        return null;
     }
 
     /**
@@ -260,7 +261,7 @@ abstract class Resource
 
     /**
      * Get the text for the list view action.
-     * 
+     *
      * @return string
      */
     public static function listViewActionLabel(): string
@@ -270,7 +271,7 @@ abstract class Resource
 
     /**
      * Get the text for the list edit action.
-     * 
+     *
      * @return string
      */
     public static function listEditActionLabel(): string
