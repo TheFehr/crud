@@ -24,7 +24,7 @@ abstract class Resource
      *
      * @return string
      */
-    public static function label(): string
+    public function label(): string
     {
         return Str::of(static::nameWithoutResource())->snake(' ')->title()->plural();
     }
@@ -35,7 +35,7 @@ abstract class Resource
      *
      * @return bool|string|null
      */
-    public static function navigationTitle(): bool|string|null
+    public function navigationTitle(): bool|string|null
     {
         return null;
     }
@@ -57,7 +57,7 @@ abstract class Resource
      *
      * @return string
      */
-    public static function icon(): string
+    public function icon(): string
     {
         return 'folder';
     }
@@ -128,7 +128,7 @@ abstract class Resource
      *
      * @return string
      */
-    public static function singularLabel(): string
+    public function singularLabel(): string
     {
         return Str::of(static::nameWithoutResource())->snake(' ')->title()->singular();
     }
@@ -136,7 +136,7 @@ abstract class Resource
     /**
      * @return string
      */
-    public static function nameWithoutResource(): string
+    public function nameWithoutResource(): string
     {
         return Str::of(static::class)
             ->classBasename()
@@ -151,7 +151,7 @@ abstract class Resource
      *
      * @return string|null
      */
-    public static function actionsDropDownLabel(): string
+    public function actionsDropDownLabel(): string
     {
         return __('Actions');
     }
@@ -161,7 +161,7 @@ abstract class Resource
      *
      * @return string|null
      */
-    public static function createButtonLabel(): string
+    public function createButtonLabel(): string
     {
         return __('Create :resource', ['resource' => static::singularLabel()]);
     }
@@ -171,7 +171,7 @@ abstract class Resource
      *
      * @return string
      */
-    public static function createToastMessage(): string
+    public function createToastMessage(): string
     {
         return __('The :resource was created!', ['resource' => static::singularLabel()]);
     }
@@ -181,7 +181,7 @@ abstract class Resource
      *
      * @return string
      */
-    public static function updateButtonLabel(): string
+    public function updateButtonLabel(): string
     {
         return __('Update :resource', ['resource' => static::singularLabel()]);
     }
@@ -191,7 +191,7 @@ abstract class Resource
      *
      * @return string
      */
-    public static function updateToastMessage(): string
+    public function updateToastMessage(): string
     {
         return __('The :resource was updated!', ['resource' => static::singularLabel()]);
     }
@@ -201,7 +201,7 @@ abstract class Resource
      *
      * @return string
      */
-    public static function deleteButtonLabel(): string
+    public function deleteButtonLabel(): string
     {
         return __('Delete :resource', ['resource' => static::singularLabel()]);
     }
@@ -211,7 +211,7 @@ abstract class Resource
      *
      * @return string
      */
-    public static function deleteToastMessage(): string
+    public function deleteToastMessage(): string
     {
         return __('The :resource was deleted!', ['resource' => static::singularLabel()]);
     }
@@ -221,7 +221,7 @@ abstract class Resource
      *
      * @return string
      */
-    public static function saveButtonLabel(): string
+    public function saveButtonLabel(): string
     {
         return __('Save :resource', ['resource' => static::singularLabel()]);
     }
@@ -231,7 +231,7 @@ abstract class Resource
      *
      * @return string
      */
-    public static function restoreButtonLabel(): string
+    public function restoreButtonLabel(): string
     {
         return __('Restore :resource', ['resource' => static::singularLabel()]);
     }
@@ -241,7 +241,7 @@ abstract class Resource
      *
      * @return string
      */
-    public static function restoreToastMessage(): string
+    public function restoreToastMessage(): string
     {
         return __('The :resource was restored!', ['resource' => static::singularLabel()]);
     }
@@ -251,7 +251,7 @@ abstract class Resource
      *
      * @return string
      */
-    public static function trafficCopMessage(): string
+    public function trafficCopMessage(): string
     {
         return __('Since the :resource was edited, its values have changed. Refresh the page to see them or click ":button" again to replace them.', [
             'resource' => static::singularLabel(),
@@ -264,17 +264,17 @@ abstract class Resource
      *
      * @return string
      */
-    public static function listBreadcrumbsMessage(): string
+    public function listBreadcrumbsMessage(): string
     {
         return static::label();
     }
 
     /**
      * Get the text for the actions column on the list view.
-     * 
+     *
      * @return string
      */
-    public static function listScreenActionsLabel(): string
+    public function listScreenActionsLabel(): string
     {
         return __('Actions');
     }
@@ -284,7 +284,7 @@ abstract class Resource
      *
      * @return string
      */
-    public static function listScreenActionsViewLabel(): string
+    public function listScreenActionsViewLabel(): string
     {
         return __('View');
     }
@@ -294,7 +294,7 @@ abstract class Resource
      *
      * @return string
      */
-    public static function listScreenActionsEditLabel(): string
+    public function listScreenActionsEditLabel(): string
     {
         return __('Edit');
     }
@@ -304,7 +304,7 @@ abstract class Resource
      *
      * @return string
      */
-    public static function createBreadcrumbsMessage(): string
+    public function createBreadcrumbsMessage(): string
     {
         return __('New :resource', ['resource' => static::singularLabel()]);
     }
@@ -314,7 +314,7 @@ abstract class Resource
      *
      * @return string
      */
-    public static function editBreadcrumbsMessage(): string
+    public function editBreadcrumbsMessage(): string
     {
         return __('Edit :resource', ['resource' => static::singularLabel()]);
     }
@@ -322,7 +322,7 @@ abstract class Resource
     /**
      * Get the text for the edit button on the view screen
      */
-    public static function viewScreenEditButtonLabel(): string
+    public function viewScreenEditButtonLabel(): string
     {
         return __('Edit');
     }
@@ -332,7 +332,7 @@ abstract class Resource
      *
      * @return null|string
      */
-    public static function description(): ?string
+    public function description(): ?string
     {
         return null;
     }
@@ -342,7 +342,7 @@ abstract class Resource
      *
      * @return string
      */
-    public static function emptyResourceForAction(): string
+    public function emptyResourceForAction(): string
     {
         return __('No ":resources" over which you can perform an action', ['resources' => static::label()]);
     }

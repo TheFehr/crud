@@ -34,7 +34,7 @@ class CreateScreen extends CrudScreen
     public function commandBar(): array
     {
         return [
-            Button::make($this->resource::createButtonLabel())
+            Button::make($this->resource->createButtonLabel())
                 ->method('save')
                 ->icon('check'),
         ];
@@ -63,7 +63,7 @@ class CreateScreen extends CrudScreen
 
         $request->resource()->onSave($request, $model);
 
-        Toast::info($this->resource::createToastMessage());
+        Toast::info($this->resource->createToastMessage());
 
         return redirect()->route('platform.resource.list', $request->resource);
     }

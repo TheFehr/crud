@@ -44,29 +44,29 @@ class ViewScreen extends CrudScreen
         return [
             $this->actionsButtons(),
 
-            Link::make($this->resource::viewScreenEditButtonLabel())
+            Link::make($this->resource->viewScreenEditButtonLabel())
                 ->icon('pencil')
                 ->canSee($this->can('update'))
                 ->route('platform.resource.edit', [
-                    $this->resource::uriKey(),
+                    $this->resource->uriKey(),
                     $this->model->getKey(),
                 ]),
 
-            Button::make($this->resource::deleteButtonLabel())
+            Button::make($this->resource->deleteButtonLabel())
                 ->novalidate()
                 ->confirm(__('Are you sure you want to delete this resource?'))
                 ->canSee(! $this->isSoftDeleted() && $this->can('delete'))
                 ->method('delete')
                 ->icon('trash'),
 
-            Button::make($this->resource::deleteButtonLabel())
+            Button::make($this->resource->deleteButtonLabel())
                 ->novalidate()
                 ->confirm(__('Are you sure you want to force delete this resource?'))
                 ->canSee($this->isSoftDeleted() && $this->can('forceDelete'))
                 ->method('forceDelete')
                 ->icon('trash'),
 
-            Button::make($this->resource::restoreButtonLabel())
+            Button::make($this->resource->restoreButtonLabel())
                 ->novalidate()
                 ->confirm(__('Are you sure you want to restore this resource?'))
                 ->canSee($this->isSoftDeleted() && $this->can('restore'))

@@ -17,7 +17,7 @@ Route::screen('/crud/create/{resource?}', CreateScreen::class)
 
         return $trail
             ->parent('platform.resource.list')
-            ->push($resource::createBreadcrumbsMessage());
+            ->push($resource->createBreadcrumbsMessage());
     });
 
 Route::screen('/crud/view/{resource?}/{id}', ViewScreen::class)
@@ -28,7 +28,7 @@ Route::screen('/crud/view/{resource?}/{id}', ViewScreen::class)
 
         return $trail
             ->parent('platform.resource.list')
-            ->push(request()->route('id'), \route('platform.resource.view', [$resource::uriKey(), $id]));
+            ->push(request()->route('id'), \route('platform.resource.view', [$resource->uriKey(), $id]));
     });
 
 Route::screen('/crud/edit/{resource?}/{id}', EditScreen::class)
@@ -38,7 +38,7 @@ Route::screen('/crud/edit/{resource?}/{id}', EditScreen::class)
 
         return $trail
             ->parent('platform.resource.view', [$name, $id])
-            ->push($resource::editBreadcrumbsMessage());
+            ->push($resource->editBreadcrumbsMessage());
     });
 
 Route::screen('/crud/list/{resource?}', ListScreen::class)
@@ -47,5 +47,5 @@ Route::screen('/crud/list/{resource?}', ListScreen::class)
         $resource = app(ResourceRequest::class)->resource();
 
         return $trail->parent('platform.index')
-            ->push($resource::listBreadcrumbsMessage(), \route('platform.resource.list', [$resource::uriKey()]));
+            ->push($resource->listBreadcrumbsMessage(), \route('platform.resource.list', [$resource->uriKey()]));
     });

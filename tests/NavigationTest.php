@@ -13,11 +13,13 @@ class NavigationTest extends TestCase
      */
     public function testNoDisplayResourceInNavigation(): void
     {
+        $postResource = new PostResource();
+        $noDisplayInNavigationResource = new NoDisplayInNavigationResource();
         $this->get(route('platform.resource.list', [
             'resource' => PostResource::uriKey(),
         ]))
-            ->assertSee(PostResource::singularLabel())
-            ->assertDontSee(NoDisplayInNavigationResource::singularLabel())
+            ->assertSee($postResource->singularLabel())
+            ->assertDontSee($noDisplayInNavigationResource->singularLabel())
             ->assertOk();
     }
 }

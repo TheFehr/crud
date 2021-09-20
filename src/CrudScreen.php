@@ -58,8 +58,8 @@ abstract class CrudScreen extends Screen
         $this->middleware(function ($request, $next) {
             $this->request = app(ResourceRequest::class);
             $this->resource = $this->request->resource();
-            $this->name = $this->resource::label();
-            $this->description = $this->resource::description();
+            $this->name = $this->resource->label();
+            $this->description = $this->resource->description();
             $this->permission = $this->resource::permission();
 
             return $next($request);
@@ -101,7 +101,7 @@ abstract class CrudScreen extends Screen
     {
         $actions = $this->availableActions();
 
-        return DropDown::make($this->resource::actionsDropDownLabel())
+        return DropDown::make($this->resource->actionsDropDownLabel())
             ->icon('options-vertical')
             ->canSee($actions->isNotEmpty())
             ->list($actions->toArray());
@@ -162,7 +162,7 @@ abstract class CrudScreen extends Screen
     {
         $request->resource()->onSave($request, $request->findModelOrFail());
 
-        Toast::info($this->resource::updateToastMessage());
+        Toast::info($this->resource->updateToastMessage());
 
         return redirect()->route('platform.resource.list', $request->resource);
     }
@@ -180,7 +180,7 @@ abstract class CrudScreen extends Screen
             $request->findModelOrFail()
         );
 
-        Toast::info($this->resource::deleteToastMessage());
+        Toast::info($this->resource->deleteToastMessage());
 
         return redirect()->route('platform.resource.list', $request->resource);
     }
@@ -198,7 +198,7 @@ abstract class CrudScreen extends Screen
             $request->findModelOrFail()
         );
 
-        Toast::info($this->resource::deleteToastMessage());
+        Toast::info($this->resource->deleteToastMessage());
 
         return redirect()->route('platform.resource.list', $request->resource);
     }
@@ -214,7 +214,7 @@ abstract class CrudScreen extends Screen
             $request->findModelOrFail()
         );
 
-        Toast::info($this->resource::restoreToastMessage());
+        Toast::info($this->resource->restoreToastMessage());
 
         return redirect()->route('platform.resource.list', $request->resource);
     }

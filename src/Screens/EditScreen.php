@@ -41,7 +41,7 @@ class EditScreen extends CrudScreen
     public function commandBar(): array
     {
         return [
-            Button::make($this->resource::updateButtonLabel())
+            Button::make($this->resource->updateButtonLabel())
                 ->canSee($this->request->can('update'))
                 ->method('update')
                 ->icon('check')
@@ -49,21 +49,21 @@ class EditScreen extends CrudScreen
                     '_retrieved_at' => optional($this->model->{$this->model->getUpdatedAtColumn()})->toJson(),
                 ]),
 
-            Button::make($this->resource::deleteButtonLabel())
+            Button::make($this->resource->deleteButtonLabel())
                 ->novalidate()
                 ->confirm(__('Are you sure you want to delete this resource?'))
                 ->canSee(! $this->isSoftDeleted() && $this->can('delete'))
                 ->method('delete')
                 ->icon('trash'),
 
-            Button::make($this->resource::deleteButtonLabel())
+            Button::make($this->resource->deleteButtonLabel())
                 ->novalidate()
                 ->confirm(__('Are you sure you want to force delete this resource?'))
                 ->canSee($this->isSoftDeleted() && $this->can('forceDelete'))
                 ->method('forceDelete')
                 ->icon('trash'),
 
-            Button::make($this->resource::restoreButtonLabel())
+            Button::make($this->resource->restoreButtonLabel())
                 ->novalidate()
                 ->confirm(__('Are you sure you want to restore this resource?'))
                 ->canSee($this->isSoftDeleted() && $this->can('restore'))

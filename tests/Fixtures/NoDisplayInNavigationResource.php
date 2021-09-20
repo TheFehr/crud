@@ -9,7 +9,7 @@ class NoDisplayInNavigationResource extends PostResource
      *
      * @return bool
      */
-    public static function navigationTitle(): bool
+    public function navigationTitle(): bool
     {
         return false;
     }

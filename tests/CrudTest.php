@@ -28,12 +28,13 @@ class CrudTest extends TestCase
      */
     public function testListResource(): void
     {
+        $resource = new PostResource();
         $this->get(route('platform.resource.list', [
             'resource' => PostResource::uriKey(),
         ]))
-            ->assertSee(PostResource::singularLabel())
-            ->assertSee(PostResource::createButtonLabel())
-            ->assertSee(PostResource::listBreadcrumbsMessage())
+            ->assertSee($resource->singularLabel())
+            ->assertSee($resource->createButtonLabel())
+            ->assertSee($resource->listBreadcrumbsMessage())
             ->assertSee('Edit')
             ->assertSeeText($this->posts->first()->description)
             ->assertOk();
@@ -44,11 +45,12 @@ class CrudTest extends TestCase
      */
     public function testCreateResource(): void
     {
+        $resource = new PostResource();
         $this->get(route('platform.resource.create', [
             'resource' => PostResource::uriKey(),
         ]))
-            ->assertSee(PostResource::createButtonLabel())
-            ->assertSee(PostResource::createBreadcrumbsMessage())
+            ->assertSee($resource->createButtonLabel())
+            ->assertSee($resource->createBreadcrumbsMessage())
             ->assertSee('A string containing the name text and design to attract attention')
             ->assertOk();
     }
@@ -60,6 +62,7 @@ class CrudTest extends TestCase
     {
         $post = Post::factory()->make();
 
+        $resource = new PostResource();
         $this
             ->followingRedirects()
             ->post(route('platform.resource.create', [
@@ -68,14 +71,14 @@ class CrudTest extends TestCase
             ]), [
                 'model' => $post->toArray(),
             ])
-            ->assertSee(PostResource::createToastMessage())
+            ->assertSee($resource->createToastMessage())
             ->assertOk();
 
         $this->get(route('platform.resource.edit', [
             'resource' => PostResource::uriKey(),
             'id'       => Post::orderBy('id', 'desc')->first(),
         ]))
-            ->assertSee(PostResource::updateButtonLabel())
+            ->assertSee($resource->updateButtonLabel())
             ->assertSee($post->title)
             ->assertSee($post->description)
             ->assertSee($post->body)
@@ -91,6 +94,7 @@ class CrudTest extends TestCase
             'title' => 'unique title',
         ]);
 
+        $resource = new PostResource();
         $this
             ->followingRedirects()
             ->post(route('platform.resource.create', [
@@ -99,7 +103,7 @@ class CrudTest extends TestCase
             ]), [
                 'model' => $post->toArray(),
             ])
-            ->assertSee(PostResource::createToastMessage())
+            ->assertSee($resource->createToastMessage())
             ->assertOk();
 
         $post = Post::factory()->make([
@@ -126,12 +130,13 @@ class CrudTest extends TestCase
     {
         $post = $this->posts->first();
 
+        $resource = new PostResource();
         $this->get(route('platform.resource.edit', [
             'resource' => PostResource::uriKey(),
             'id'       => $post,
         ]))
-            ->assertSee(PostResource::updateButtonLabel())
-            ->assertSee(PostResource::editBreadcrumbsMessage())
+            ->assertSee($resource->updateButtonLabel())
+            ->assertSee($resource->editBreadcrumbsMessage())
             ->assertSee($post->title)
             ->assertSee($post->description)
             ->assertSee($post->body)
@@ -164,6 +169,7 @@ class CrudTest extends TestCase
 
         $post->description = Str::random();
 
+        $resource = new PostResource();
         $this
             ->followingRedirects()
             ->post(route('platform.resource.edit', [
@@ -173,7 +179,7 @@ class CrudTest extends TestCase
             ]), [
                 'model' => $post->toArray(),
             ])
-            ->assertSee(PostResource::updateToastMessage())
+            ->assertSee($resource->updateToastMessage())
             ->assertOk();
 
         $this->get(route('platform.resource.edit', [
@@ -191,6 +197,7 @@ class CrudTest extends TestCase
     {
         $post = $this->posts->first();
 
+        $resource = new PostResource();
         $this
             ->followingRedirects()
             ->post(route('platform.resource.edit', [
@@ -198,7 +205,7 @@ class CrudTest extends TestCase
                 'id'       => $post,
                 'method'   => 'delete',
             ]))
-            ->assertSee(PostResource::deleteToastMessage())
+            ->assertSee($resource->deleteToastMessage())
             ->assertOk();
 
         $this->get(route('platform.resource.edit', [

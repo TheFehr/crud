@@ -65,15 +65,16 @@ class ArbitratorTest extends TestCase
         /** @var Collection $menu */
         $menu = app(\Orchid\Platform\Dashboard::class)->menu[\Orchid\Platform\Dashboard::MENU_MAIN];
 
-        $existName = $menu->filter(function (Menu $menu) {
-            return $menu->get('name') === PostResource::label();
+        $resource = new PostResource();
+        $existName = $menu->filter(function (Menu $menu) use ($resource) {
+            return $menu->get('name') === $resource->label();
         })->isNotEmpty();
 
         $this->assertTrue($existName);
 
-        $existUri = $menu->filter(function (Menu $menu) {
+        $existUri = $menu->filter(function (Menu $menu) use ($resource) {
             return $menu->get('href') === \route('platform.resource.list', [
-                    'resource' => PostResource::uriKey(),
+                    'resource' => $resource::uriKey(),
                 ]);
         })->isNotEmpty();
 
@@ -99,9 +100,10 @@ class ArbitratorTest extends TestCase
      */
     public function testBootRegisterExistingPermissionResource(): void
     {
+        $resource = new PrivateResource();
         Dashboard::registerPermissions(
             ItemPermission::group('Other')
-                ->addPermission(PrivateResource::permission(), PrivateResource::label())
+                ->addPermission(PrivateResource::permission(), $resource->label())
         );
 
         $this->arbitrator->boot();

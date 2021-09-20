@@ -13,6 +13,7 @@ class TrafficCopTest extends TestCase
         $post->touch();
         $retrievedAt = $post->updated_at->subMinutes(5)->toJson();
 
+        $postResource = new PostResource();
         $this
             ->followingRedirects()
             ->from(route('platform.resource.edit', [
@@ -27,7 +28,7 @@ class TrafficCopTest extends TestCase
             ]), [
                 'model'         => $post->toArray(),
             ])
-            ->assertSee(PostResource::trafficCopMessage())
+            ->assertSee($postResource->trafficCopMessage())
             ->assertOk();
     }
 
@@ -37,6 +38,7 @@ class TrafficCopTest extends TestCase
         $post->touch();
         $retrievedAt = $post->updated_at->addMinutes(5)->toJson();
 
+        $postResource = new PostResource();
         $this
             ->followingRedirects()
             ->post(route('platform.resource.edit', [
@@ -47,7 +49,7 @@ class TrafficCopTest extends TestCase
             ]), [
                 'model'         => $post->toArray(),
             ])
-            ->assertDontSee(PostResource::trafficCopMessage())
+            ->assertDontSee($postResource->trafficCopMessage())
             ->assertOk();
     }
 }

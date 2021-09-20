@@ -66,7 +66,7 @@ class ActionTest extends TestCase
                 'method'    => 'action',
                 '_action'   => CustomAction::name(),
             ]))
-            ->assertSee(PostActionResource::emptyResourceForAction())
+            ->assertSee((new PostActionResource())->emptyResourceForAction())
             ->assertOk();
     }
 

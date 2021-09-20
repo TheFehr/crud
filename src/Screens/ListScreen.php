@@ -37,8 +37,8 @@ class ListScreen extends CrudScreen
     {
         return [
             $this->actionsButtons(),
-            Link::make($this->resource::createButtonLabel())
-                ->route('platform.resource.create', $this->resource::uriKey())
+            Link::make($this->resource->createButtonLabel())
+                ->route('platform.resource.create', $this->resource->uriKey())
                 ->canSee($this->can('create'))
                 ->icon('plus'),
         ];
@@ -63,7 +63,7 @@ class ListScreen extends CrudScreen
                     ->checked(false);
             }));
 
-        $grid->push(TD::make($this->resource::listScreenActionsLabel())
+        $grid->push(TD::make($this->resource->listScreenActionsLabel())
             ->cantHide()
             ->render(function (Model $model) {
                 return $this->getTableActions($model)
@@ -87,19 +87,19 @@ class ListScreen extends CrudScreen
     {
         return Group::make([
 
-            Link::make($this->resource::listScreenActionsViewLabel())
+            Link::make($this->resource->listScreenActionsViewLabel())
                 ->icon('eye')
                 ->canSee($this->can('view'))
                 ->route('platform.resource.view', [
-                    $this->resource::uriKey(),
+                    $this->resource->uriKey(),
                     $model->getAttribute($model->getKeyName()),
                 ]),
 
-            Link::make($this->resource::listScreenActionsEditLabel())
+            Link::make($this->resource->listScreenActionsEditLabel())
                 ->icon('pencil')
                 ->canSee($this->can('update'))
                 ->route('platform.resource.edit', [
-                    $this->resource::uriKey(),
+                    $this->resource->uriKey(),
                     $model->getAttribute($model->getKeyName()),
                 ]),
         ]);

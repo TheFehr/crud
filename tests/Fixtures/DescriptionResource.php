@@ -7,7 +7,7 @@ class DescriptionResource extends PostResource
     /**
      * @return string|null
      */
-    public static function description(): ?string
+    public function description(): ?string
     {
         return 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
     }

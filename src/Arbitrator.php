@@ -75,17 +75,17 @@ class Arbitrator
     {
         $this->resources
             ->groupBy(function (Resource $resource) {
-                return $resource::navigationTitle();
+                return $resource->navigationTitle();
             })
             ->sort()
             ->values()
             ->each(function (Collection $resourceGroup) {
                 $resourceGroup->sort(function (Resource $resource) {
-                    return [$resource::sort(), $resource::label()];
+                    return [$resource::sort(), $resource->label()];
                 })
                     ->values()
                     ->sort(function ($resource, $resource2) {
-                        return strnatcmp($resource::label(), $resource2::label());
+                        return strnatcmp($resource->label(), $resource2->label());
                     })
                     ->values()
                     ->each(function (Resource $resource, $key) {
@@ -104,7 +104,7 @@ class Arbitrator
     public function find(string $key): ?Resource
     {
         return $this->resources->filter(function (Resource $resource) use ($key) {
-            return $resource::uriKey() === $key;
+            return $resource->uriKey() === $key;
         })->first();
     }
 
@@ -130,17 +130,17 @@ class Arbitrator
      */
     private function registerMenu(Resource $resource, int $key): Arbitrator
     {
-        if ($resource::navigationTitle() === false) {
+        if ($resource->navigationTitle() === false) {
             return $this;
         }
 
-        $title = $resource::navigationTitle() ?? __('Resources');
+        $title = $resource->navigationTitle() ?? __('Resources');
         View::composer('platform::dashboard', function () use ($resource, $key, $title) {
             Dashboard::registerMenuElement(
                 \Orchid\Platform\Dashboard::MENU_MAIN,
-                Menu::make($resource::label())
-                    ->icon($resource::icon())
-                    ->route('platform.resource.list', [$resource::uriKey()])
+                Menu::make($resource->label())
+                    ->icon($resource->icon())
+                    ->route('platform.resource.list', [$resource->uriKey()])
                     ->active($this->activeMenu($resource))
                     ->permission($resource::permission())
                     ->sort($resource::sort())
@@ -172,7 +172,7 @@ class Arbitrator
 
         Dashboard::registerPermissions(
             ItemPermission::group('CRUD')
-                ->addPermission($resource::permission(), $resource::label())
+                ->addPermission($resource::permission(), $resource->label())
         );
 
         return $this;
@@ -187,13 +187,13 @@ class Arbitrator
     {
         return [
             route('platform.resource.list', [
-                'resource' => $resource::uriKey(),
+                'resource' => $resource->uriKey(),
             ]),
             route('platform.resource.create', [
-                'resource' => $resource::uriKey(),
+                'resource' => $resource->uriKey(),
             ]),
             route('platform.resource.edit', [
-                'resource' => $resource::uriKey(),
+                'resource' => $resource->uriKey(),
                 'id'       => '*',
             ]),
         ];

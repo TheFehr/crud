@@ -11,9 +11,10 @@ class DescriptionTest extends TestCase
      */
     public function testListResource(): void
     {
+        $resource = new DescriptionResource();
         $this->get(route('platform.resource.list', [
             'resource' => DescriptionResource::uriKey(),
         ]))
-            ->assertSee(DescriptionResource::description());
+            ->assertSee($resource->description());
     }
 }

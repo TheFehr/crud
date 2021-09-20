@@ -46,7 +46,7 @@ class UpdateRequest extends CreateRequest
         $resource = $this->resource();
 
         // Check to see whether Traffic Cop is enabled for this resource...
-        if ($resource::trafficCop() === false) {
+        if ($resource->trafficCop() === false) {
             return false;
         }
 
