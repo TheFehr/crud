@@ -74,6 +74,9 @@ class Arbitrator
     public function boot(): void
     {
         $this->resources
+            ->filter(function (Resource $resource) {
+                return \Auth::user()->hasAccess($resource::permission());
+            })
             ->groupBy(function (Resource $resource) {
                 return $resource->navigationTitle();
             })
