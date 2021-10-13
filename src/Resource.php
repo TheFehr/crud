@@ -354,7 +354,7 @@ abstract class Resource
      *
      * @return array
      */
-    public function rules(Model $model): array
+    public function rules($model): array
     {
         return [];
     }
@@ -425,7 +425,7 @@ abstract class Resource
      * @param ResourceRequest $request
      * @param Model           $model
      */
-    public function onSave(ResourceRequest $request, Model $model)
+    public function onSave(ResourceRequest $request, $model)
     {
         $model->forceFill($request->all())->save();
     }
@@ -437,7 +437,7 @@ abstract class Resource
      *
      * @throws Exception
      */
-    public function onDelete(Model $model)
+    public function onDelete($model)
     {
         $model->delete();
     }
@@ -457,7 +457,7 @@ abstract class Resource
      *
      * @param Model $model
      */
-    public function onRestore(Model $model)
+    public function onRestore($model)
     {
         $model->restore();
     }
@@ -469,7 +469,7 @@ abstract class Resource
      *
      * @throws Exception
      */
-    public function onForceDelete(Model $model)
+    public function onForceDelete($model)
     {
         // Force deleting a single model instance...
         $model->forceDelete();
