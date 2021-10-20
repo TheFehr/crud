@@ -195,6 +195,10 @@ class Arbitrator
             route('platform.resource.create', [
                 'resource' => $resource->uriKey(),
             ]),
+            route('platform.resource.view', [
+                'resource' => $resource::uriKey(),
+                'id'       => '*',
+            ]),
             route('platform.resource.edit', [
                 'resource' => $resource->uriKey(),
                 'id'       => '*',
