@@ -145,7 +145,7 @@ class Arbitrator
                 ->sort($resource::sort());
 
             $menu = Menu::make($resource->label())
-                ->icon($resource::icon())
+                ->icon($resource->icon())
                 ->route('platform.resource.list', [$resource::uriKey()])
                 ->active($this->activeMenu($resource))
                 ->permission($resource::permission())
