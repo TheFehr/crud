@@ -36,7 +36,7 @@ abstract class Resource
      *
      * @return bool|string|null
      */
-    public static function navigationTitle(): bool|string|null
+    public function navigationTitle(): bool|string|null
     {
         return null;
     }

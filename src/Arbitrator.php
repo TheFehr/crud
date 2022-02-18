@@ -74,35 +74,21 @@ class Arbitrator
     public function boot(): void
     {
         $this->resources
-<<<<<<< HEAD
             ->filter(function (Resource $resource) {
                 return \Auth::user()->hasAccess($resource::permission());
             })
             ->groupBy(function (Resource $resource) {
                 return $resource->navigationTitle();
             })
-=======
-            ->groupBy(function (Resource $resource) {
-                return $resource::navigationTitle();
-            })
->>>>>>> 2b8405b (Allow custom title for the resources in the navigation)
             ->sort()
             ->values()
             ->each(function (Collection $resourceGroup) {
                 $resourceGroup->sort(function (Resource $resource) {
-<<<<<<< HEAD
                     return [$resource::sort(), $resource->label()];
                 })
                     ->values()
                     ->sort(function ($resource, $resource2) {
                         return strnatcmp($resource->label(), $resource2->label());
-=======
-                    return [$resource::sort(), $resource::label()];
-                })
-                    ->values()
-                    ->sort(function ($resource, $resource2) {
-                        return strnatcmp($resource::label(), $resource2::label());
->>>>>>> 2b8405b (Allow custom title for the resources in the navigation)
                     })
                     ->values()
                     ->each(function (Resource $resource, $key) {
@@ -147,11 +133,11 @@ class Arbitrator
      */
     private function registerMenu(Resource $resource, int $key): Arbitrator
     {
-        if ($resource::navigationTitle() === false) {
+        if ($resource->navigationTitle() === false) {
             return $this;
         }
 
-        $title = $resource::navigationTitle() ?? __('Resources');
+        $title = $resource->navigationTitle() ?? __('Resources');
         View::composer('platform::dashboard', function () use ($resource, $key, $title) {
             $title = Menu::make()
                 ->canSee($key === 0)
